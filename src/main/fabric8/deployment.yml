@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: ${project.artifactId}
+spec:
+  template:
+    spec:
+      containers:
+      - image: ${project.artifactId}:${project.version}
+        name: ${project.artifactId}
+        ports:
+        - containerPort: 8080
+        env:
+        - name: JAVA_OPTIONS
+          value: "-Dspring.profiles.active=openshift"
+        - name: KAFKA_BOOTSTRAP_SERVER
+          value: my-kafka-cluster
+        - name: KAFKA_BOOTSTRAP_PORT
+          value: 9092
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 15
+          timeoutSeconds: 2
+        livelinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 15
+          timeoutSeconds: 2
