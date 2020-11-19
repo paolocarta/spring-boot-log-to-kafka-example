@@ -1,5 +1,6 @@
 *.iml
 target/
+lsp/
 .idea/
 
 # Visual Code
@@ -8,3 +9,4 @@ target/
 .project
 .classpath
 .factorypath
+
