@@ -6,7 +6,7 @@ spec:
   template:
     spec:
       containers:
-      - image: ${project.artifactId}:${project.version}
+      - image: ${project.artifactId}:latest
         name: ${project.artifactId}
         ports:
         - containerPort: 8080
@@ -17,13 +17,3 @@ spec:
           value: my-kafka-cluster
         - name: KAFKA_BOOTSTRAP_PORT
           value: 9092
-        readinessProbe:
-          tcpSocket:
-            port: 8080
-          initialDelaySeconds: 15
-          timeoutSeconds: 2
-        livelinessProbe:
-          tcpSocket:
-            port: 8080
-          initialDelaySeconds: 15
-          timeoutSeconds: 2
